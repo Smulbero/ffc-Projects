@@ -1,0 +1,44 @@
+* {
+  font-family:sans-serif;
+    color: white;
+}
+body {
+  background-color: rgba(0,150,255,100%);
+}
+
+.container {
+  max-width: 600px;
+  margin: auto
+}
+
+fieldset {
+  padding: 20px 20px 40px 20px;
+  background-color: rgba(0,0,120,70%);
+}
+
+label {
+  font-size: 20px;
+  margin: 30px 0 5px 0;
+  display: block;
+}
+
+input, select {
+  width: 75%;
+  height: 2em;
+  font-size: 16px;
+  display: block;
+  color: black;
+}
+
+input[type="radio"],input[type="checkbox"] {
+  margin: -5px 0 0 0;
+  padding: none; 
+  width: 4%;
+  display: inline-block;
+}
+
+.radioOption {
+  height: 0px;
+  padding: none; 
+  display: inline-block;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="widht=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <main>
+      <header id="header">
+        <div class="header-logo">
+          <img 
+            id="header-img"
+            class="logo"
+            src="https://cdn.freecodecamp.org/testable-projects-fcc/images/product-landing-page-logo.png"
+            alt="original trombones logo"
+          >
+        </div>
+        <div class="header-nav">
+          <nav id="nav-bar">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#how-it-works" class="nav-link">How It Works</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+          </nav>
+        </div>
+      </header>
+      
+      <div class="main-content">
+        <section id="contact">
+          <h2>Home-made masterpieces</h2>
+          <form id="form" method="post" action="https://www.freecodecamp.com/email-submit">
+            <input id="email" type="email" name="email" placeholder="Enter your email address">
+            <input id="submit" type="submit" value="Does nothing">
+          </form>          
+        </section>
+
+        <section id="features">
+          <div class="feature">
+            <div class="feature-logo">
+              <img
+                class="feature-img"
+                src="https://cdn.pixabay.com/photo/2020/09/27/18/38/floppy-5607525_1280.png"
+                alt=""
+              >
+            </div>
+            <div class="feature-text">
+              <h2>Premium Materials</h2>
+              <p>Some very useful text goes here</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-logo">
+              <img
+                class="feature-img"
+                src="https://cdn.pixabay.com/photo/2020/09/27/18/38/floppy-5607525_1280.png"
+                alt=""
+              >
+            </div>
+            <div class="feature-text">
+              <h2>Premium Materials</h2>
+              <p>Some very useful text goes hereSome very useful text goes hereSome very useful text goes here</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-logo">
+              <img
+                class="feature-img"
+                src="https://cdn.pixabay.com/photo/2020/09/27/18/38/floppy-5607525_1280.png"
+                alt=""
+              >
+            </div>
+            <div class="feature-text">
+              <h2>Premium Materials</h2>
+              <p>Some very useful text goes here</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="how-it-works">
+          <div class="video-container">
+            <iframe 
+              id="video" 
+              height="315" 
+              width="400"
+              src="https://www.youtube-nocookie.com/embed/y8Yv4pnO7qc?rel=0&amp;controls=0&amp;showinfo=0" 
+              frameborder="0" 
+              allowfullscreen="">
+            </iframe>
+          </div>
+        </section>
+
+        <section id="pricing">
+          <div class="pricing-options">
+            <div class="price-option">
+              <h3>Basic</h3>
+              <p class="price">$444</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <input type="submit" value="does nothing">
+            </div>
+            <div class="price-option">
+              <h3>Better</h3>
+              <p class="price">$444,50</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <input type="submit" value="does nothing">
+            </div>
+            <div class="price-option">
+              <h3>Premium</h3>
+              <p class="price">$4444</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <p>descriptive text here</p>
+              <input type="submit" value="does nothing">
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer>
+        <a href="">Privacy</a>
+        <a href="">Terms</a>
+        <a href="">Contact</a>
+        <p>Copyright11,111</p>
+      </footer>
+    </main>
+  </body>
+</html>

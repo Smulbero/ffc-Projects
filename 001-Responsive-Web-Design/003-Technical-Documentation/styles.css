@@ -1,0 +1,58 @@
+@media (min-width: 500px) and (max-width: 1199px) {
+
+}
+
+* {
+  box-sizing: inherit;  
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e2e2e2;
+}
+
+#main-doc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 1500px;
+}
+
+#navbar { 
+  width: 19%;
+  height: 100%;
+  z-index: 1000;  
+  border-right: 2px solid black;
+  position: fixed;
+}
+
+#navbar header {  
+  border-bottom: 0.5px solid black;
+  padding-left: 10px;
+  width: 298px;
+}
+
+#navbar li { 
+  display: block;
+  border-bottom: 0.5px solid black;
+  list-style-type: none;
+  padding: 20px 0 20px 0;
+  width: 298px;
+  position: relative;
+  left: -40px;
+}
+
+.content {
+  max-width: 79%;
+  position: relative;
+  left: 320px;
+}
+
+.main-section {
+  display: block;
+  padding-left: 10px;  
+  border-bottom: 0.5px solid black;
+}

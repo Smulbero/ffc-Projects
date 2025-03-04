@@ -1,0 +1,51 @@
+main {
+  background-color: #b1b1b1;
+}
+
+header {
+  text-align: center;
+}
+
+#img-div {
+  background-color: rgb(209, 209, 209);
+  text-align: center;
+}
+
+#image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  padding-top: 30px;
+}
+
+#img-caption {
+  padding: 30px 0;
+}
+
+#tribute-info {
+  width: 50%;
+  max-width: 500px;
+  margin: auto;
+}
+
+ul {
+  padding: 0 0 10px 0;
+}
+
+ul > li {
+  margin: 30px 0;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.italic {
+  font-style: italic;
+}
+
+#tribute-more-info {
+  text-align: center;
+  padding: 10px 0;
+}
