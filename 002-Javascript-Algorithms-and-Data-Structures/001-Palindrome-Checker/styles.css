@@ -1,0 +1,92 @@
+@media (max-width: 600px) {
+  main {
+    width: 90%;
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #3e3e3e;
+  color: #fff;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 40vh;
+  min-height: 400px;
+  width: 50%;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+.container {
+  width: 80%;
+  max-width: 400px;
+  height: 30%;
+  min-height: 100px;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+#header {
+  margin: 0;
+  height: 20%;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#inputContainer {
+  background-color: #fff;
+  color: #000; 
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 60%;
+  border: none;
+  border-bottom: 1px solid #3e3e3e;
+  padding-bottom: 5px;
+}
+
+button {
+  width: 20%;
+  padding: 5px;
+  background-color: #3e3e3e;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+/* Hide result field by default */
+#result {
+  display: none;  
+  margin: 10px 0;
+}
+
+#infoContainer {
+  background-color: bisque;
+  color: #000; 
+  text-align: center;
+}
+#infoContainer p {
+  margin: 10px 0;
+  font-size: 20px;
+}
