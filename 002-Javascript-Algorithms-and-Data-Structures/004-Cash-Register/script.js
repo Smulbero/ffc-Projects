@@ -14,30 +14,32 @@ let exactPossible = true;
 totalPrice.textContent = `$${price.toFixed(2)}`;
 
 const calculateChange = () => {
-  change = (Number(customerCash.value) - price).toFixed(2);
-  let remainingChange = change
+  change = Number((Number(customerCash.value) - price).toFixed(2));
+  let remainingChange = change;
   changeArr = [];
+  exactPossible = true;
 
-  console.log(`Change: ${change}`);
-  console.log(`Remaining Change: ${remainingChange}`);
+  // console.log(`Change: ${change}`);
+  // console.log(`Remaining Change: ${remainingChange}`);
 
   for (let i = cid.length - 1; i >= 0; i--) {
-    let coinValue = getCoinValue(cid[i][0]); // Get the coin value from the cid array
-    let coinAvailable = cid[i][1].toFixed(2); // Get the available coin amount from the cid array
+    let coinValue = getCoinValue(cid[i][0]);
+    let coinAvailable = Number(cid[i][1].toFixed(2));
     let coinCount = 0;
 
-    console.log(`Coin Value: ${coinValue}`);
-    console.log(`Coin Available: ${coinAvailable}`);
+    // console.log(`Coin Value: ${coinValue}`);
+    // // console.log(`Coin Available: ${coinAvailable}`);
 
-    while (coinAvailable >= coinValue && remainingChange >= coinValue) {
-      coinCount += coinValue;
-      coinAvailable -= coinValue;
-      remainingChange = Number((remainingChange - coinValue).toFixed(2));
-      cid[i][1] = Number((cid[i][1] - coinValue).toFixed(2));
-    }
+    // Calculate how many of this coin can be used
+    let maxCoins = Math.floor(remainingChange / coinValue);
+    let coinsToUse = Math.min(maxCoins, Math.floor(coinAvailable / coinValue));
 
-    if (coinCount > 0) {      
-      changeArr.push([cid[i][0], Number(coinCount.toFixed(2))]);
+    if (coinsToUse > 0) {
+      let amountUsed = Number((coinsToUse * coinValue).toFixed(2));
+      coinCount = amountUsed;
+      remainingChange = Number((remainingChange - amountUsed).toFixed(2));
+      cid[i][1] = Number((coinAvailable - amountUsed).toFixed(2));
+      changeArr.push([cid[i][0], coinCount]);
     }
   }
 
@@ -45,8 +47,7 @@ const calculateChange = () => {
     exactPossible = false;
   }
 
-  console.log(changeArr);
-  // Precision error, log gives back ["PENNY", 0.49] when 0.5 is expected
+  // console.log(changeArr);
 };
 
 const getCoinValue = (coin) => {
