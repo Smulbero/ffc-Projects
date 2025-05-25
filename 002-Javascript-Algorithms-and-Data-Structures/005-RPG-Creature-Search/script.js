@@ -6,7 +6,7 @@ const CREATURESPECIAL       = document.getElementById("special-name");
 const CREATURESPECIALDESC   = document.getElementById("special-description");
 const CREATUREWEIGHT        = document.getElementById("weight");
 const CREATUREHEIGHT        = document.getElementById("height");
-const CREATURETYPE          = document.getElementById("type");
+const CREATURETYPE          = document.getElementById("types");
 const CREATUREHP            = document.getElementById("hp");
 const CREATUREATK           = document.getElementById("attack");
 const CREATUREDEF           = document.getElementById("defense");
@@ -32,7 +32,7 @@ const fetchCreatureData = async (input) => {
       .then(response => response.json())
       .catch(error => {
         console.error("Error fetching creature data:", error);
-        alert("Creature not found. Please try again.");
+        alert("Creature not found");
       });
       return creatureData;
   }
@@ -46,17 +46,18 @@ const fetchCreatureData = async (input) => {
 const displayCreatureData = (data) => {
   // console.log(data);
   if (!data) {
-    alert("No data to display.");
+    console.log("No data to display.");
     return;
   }
   const {
     id, name, weight, height,
     special: 
       { name: specialName, description: specialDesc }
-    ,    
-    types: [
-      { name: typeName }
-    ], 
+    ,  
+    types,      
+    // types: [ // How to handle multiple types?
+    //   { name: typeName }
+    // ], 
     stats: [
       { base_stat: hp },
       { base_stat: attack },
@@ -72,7 +73,7 @@ const displayCreatureData = (data) => {
     Name: ${name}\n
     Weight: ${weight}\n
     Height: ${height}\n
-    Type: ${typeName}\n
+    Type(s): ${types}\n
     Special Name: ${specialName}\n
     Special Desc: ${specialDesc}\n
     HP: ${hp}\n
@@ -83,12 +84,13 @@ const displayCreatureData = (data) => {
     Speed: ${speed}
   `);
 
-  CREATUREID.innerText = id;
-  CREATURENAME.innerText = name;
-  CREATUREWEIGHT.innerText = weight;
-  CREATUREHEIGHT.innerText = height;
-  CREATURETYPE.innerText = typeName;
-  CREATURESPECIAL.innerText = specialName;
+  CREATUREID.innerText = `#${id}`;
+  CREATURENAME.innerText = `${name}`;
+  CREATUREWEIGHT.innerText = `Weight: ${weight}`;
+  CREATUREHEIGHT.innerText = `Height: ${height}`;
+  CREATURETYPE.innerHTML = ""; // Clear previous types
+  CREATURETYPE.innerHTML += types.map(type => `<span id="type-${type.name}">${type.name.toUpperCase()}</span>`).join(" ");
+  CREATURESPECIAL.innerText = `Special Ability: ${specialName}`;
   CREATURESPECIALDESC.innerText = specialDesc;
   CREATUREHP.innerText = hp;
   CREATUREATK.innerText = attack;
