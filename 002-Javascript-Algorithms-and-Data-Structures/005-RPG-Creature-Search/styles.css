@@ -1,0 +1,60 @@
+@media screen and (max-width: 600px) {
+  main {
+    width: 90%;
+  }
+  
+  #search-results {
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #515151;
+  color: #fff;
+}
+
+main {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#search-results {
+  min-height: 200px;
+  width: 80%;
+  background-color: #555555;
+  margin: 20px auto;
+}
+
+table {
+  margin: 0 auto;
+  width: 75%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
