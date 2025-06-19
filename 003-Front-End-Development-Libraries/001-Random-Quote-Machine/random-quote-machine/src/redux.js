@@ -1,4 +1,4 @@
-import {createStore} from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
 
 const QUOTES = [
   {
@@ -43,25 +43,28 @@ const QUOTES = [
   }
 ]
 
-const ADD_QUOTE = 'ADD_QUOTE';
+const initialState = {
+  quotes: QUOTES,
+  currentQuote: QUOTES[0]
+};
+
 const GET_RANDOM_QUOTE = 'GET_RANDOM_QUOTE';
 
-const reducer = (state = QUOTES, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RANDOM_QUOTE:
-      return state[action.index];
+      return {...state, currentQuote: state.quotes[Math.floor(action.index)]}
     default:
       return state;
   }
 }
 
-const store = createStore(reducer);
-
+const store = configureStore({reducer});
 
 const getRandomQuote = () => {
   return {
     type: GET_RANDOM_QUOTE,
-    index: Math.random() * QUOTES.length
+    index: Math.floor(Math.random() * QUOTES.length)
   }
 }
 
