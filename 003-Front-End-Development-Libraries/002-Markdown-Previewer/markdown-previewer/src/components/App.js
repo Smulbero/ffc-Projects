@@ -2,7 +2,7 @@ import { Editor } from './Editor.js';
 import { Previewer } from './Previewer.js';
 
 export function App(props) {
-  const store = props.store;
+  const store = props;
   return (
     <main className="app">
       <h1>Markdown Previewer</h1>

@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-const MARKDOWN = ''
 
 const initialState = {
-  markdown: MARKDOWN,
-  currentMarkdown: 'Initial markdown content',
+  currentMarkdown: 'This initial markdown content is set in the Redux store. You can edit it in the editor component and see the changes reflected here.',
 };
 
 const SET_MARKDOWN = 'SET_MARKDOWN';
@@ -12,7 +10,10 @@ const SET_MARKDOWN = 'SET_MARKDOWN';
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MARKDOWN:
-      return state.currentMarkdown = action.content;
+      return{
+        ...state,
+        currentMarkdown: action.content
+      };
     default:
       return state;
   }
