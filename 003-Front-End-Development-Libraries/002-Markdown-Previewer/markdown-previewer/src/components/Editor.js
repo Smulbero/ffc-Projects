@@ -1,5 +1,6 @@
 import { Toolbar } from "./Toolbar.js";
 
+
 export function Editor(props) {
   const store = props.store;
   const handleChange = (event) => {
@@ -7,13 +8,13 @@ export function Editor(props) {
   };
 
   return (
-    <div className="editor container bg-secondary p-0 mb-4">      
+    <div className="editor container bg-secondary p-0 mb-4" id="editor-container">      
       <Toolbar title="Editor" />
       <textarea
-        id="editor"
-        placeholder="Type your markdown here..."
+        id="editor"        
         rows="4"
-        onChange={e => handleChange(e)}>
+        onChange={e => handleChange(e)}>     
+        {store.markdown.currentMarkdown}     
       </textarea>
     </div>
   );

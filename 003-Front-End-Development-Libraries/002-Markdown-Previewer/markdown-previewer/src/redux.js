@@ -2,7 +2,34 @@ import { configureStore } from '@reduxjs/toolkit'
 
 
 const initialState = {
-  currentMarkdown: 'This initial markdown content is set in the Redux store. You can edit it in the editor component and see the changes reflected here.',
+  currentMarkdown: `# Markdown previewer test
+
+## Link
+Link to [freeCodeCamp](www.freecodecamp.org)
+
+## Inline Code
+\`Inline Code\`
+
+## Code block
+\`\`\`
+    <html>
+     <p>This is inside of a code block</p>
+    </html>
+\`\`\`
+## Unordered list
++ List item 1
++ List item 2
++ List item 3
+
+## Blockquote
+> This is a blockquote
+>> Nested blockquote
+
+## Image
+![freecodecamp logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
+
+## Bolded Text
+**This text is bolded**`
 };
 
 const SET_MARKDOWN = 'SET_MARKDOWN';
