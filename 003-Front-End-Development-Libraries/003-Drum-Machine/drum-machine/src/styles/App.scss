@@ -1,0 +1,20 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css");
+
+$background-color: #434343;
+$font-color: #ffffff;
+$font-family: 'Courier New', Courier, monospace;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  background-color: $background-color;
+  color: $font-color;
+  font-family: $font-family;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
