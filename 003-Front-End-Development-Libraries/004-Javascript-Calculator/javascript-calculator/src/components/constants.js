@@ -21,7 +21,7 @@ export const DECIMAL = "decimal";
 
 export const BUTTONDATA = [
   [
-    { label: "C", value: CLEAR,     className: "btn-danger " },
+    { label: "C", value: CLEAR,     className: "btn-danger col-6"},
     { label: "/", value: DIVIDE,    className: "btn-light" },
     { label: "*", value: MULTIPLY,  className: "btn-light" },
   ],
@@ -41,11 +41,10 @@ export const BUTTONDATA = [
     { label: "1", value: 1,         className: "btn-dark" },
     { label: "2", value: 2,         className: "btn-dark" },
     { label: "3", value: 3,         className: "btn-dark" },
-    { label: "=", value: EQUALS,    className: "btn-info" },
   ],
   [
-    { label: "0", value: 0,         className: "btn-dark" },
-    { label: "0", value: 0,         className: "btn-dark" },
+    { label: "0", value: 0,         className: "btn-dark col-6"},
     { label: ".", value: DECIMAL,   className: "btn-dark" },
+    { label: "=", value: EQUALS,    className: "btn-info equal-button "}
   ]
 ]

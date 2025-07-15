@@ -6,7 +6,7 @@ const ButtonPanel = () => {
   const BUTTONDATA = useSelector((state) => state.buttondata) || [];
 
   return (
-    <div className="button-panel">
+    <div className="button-panel w-100 h-100 container p-0 m-0">
       {
         BUTTONDATA.map((row, index) => {
           const rowData = [];
@@ -24,7 +24,7 @@ const Row = (props) => {
   const { rowData } = props || [];
 
   return (
-    <div className="button-row">
+    <div className="row m-0 p-0">
       {
         rowData.map((button, index) => {
           return (
@@ -46,7 +46,7 @@ const Button = (props) => {
   const { label, value, className } = props;
 
   return (
-    <button id={label} className={`btn ${className}`} onClick={() => console.log(value)}>
+    <button id={label} className={`btn ${className} col-3`} onClick={() => console.log(value)}>
       {label}
     </button>
   );

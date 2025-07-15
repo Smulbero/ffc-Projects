@@ -59,6 +59,7 @@ function Buttons(props) {
       {buttonGroups.map((group, groupIndex) => (
         <div key={groupIndex} className="row">
           {group.map((button, btnIndex) => {
+            // globalIndex variable needed only beucase of freeCodeCamp tests changed code structure
             const globalIndex = groupIndex * 3 + btnIndex;
             return (
               /*
