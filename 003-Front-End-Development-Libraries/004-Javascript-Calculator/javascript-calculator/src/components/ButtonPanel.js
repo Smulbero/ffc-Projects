@@ -8,6 +8,7 @@ import {
   MINUS,
   EVALUATE,
   DECIMAL,
+  BUTTONDATA
 } from "./constants.js";
 import {
   addDigit,
@@ -18,7 +19,7 @@ import {
 } from "./actions.js";
 
 const ButtonPanel = () => {
-  const BUTTONDATA = useSelector((state) => state.buttondata) || [];
+  // const BUTTONDATA = useSelector((state) => state.buttondata) || [];
 
   return (
     <div className="button-panel w-100 h-100 container p-0 m-0">

@@ -1,13 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
-  PLUS,
-  MINUS,
-  MULTIPLY,
-  DIVIDE,
   EVALUATE,
   CLEAR,
   DECIMAL,
-  BUTTONDATA,
   ADD_DIGIT,
   CHOOSE_OPERATION
 } from "./constants.js";
@@ -16,7 +11,7 @@ const initialState = {
   currentInput: '0',
   previousInput: "",
   history: [],
-  operation: "",
+  operation: null,
   result: null,
   overwrite: false,
 }
@@ -64,6 +59,9 @@ const operationsReducer = (state = initialState, action) => {
       }
 
     case CHOOSE_OPERATION:      
+
+      // Prevent multiple operation presses back to back
+      if(state.operation !== null) return state;
     
       return {
         ...state,
@@ -107,13 +105,10 @@ const operationsReducer = (state = initialState, action) => {
   }
 }
 
-const buttondataReducer = (state = BUTTONDATA) => {
-  return state;
-}
+
 
 const reducer = {
-  operations: operationsReducer,
-  buttondata: buttondataReducer
+  operations: operationsReducer
 };
 
 
