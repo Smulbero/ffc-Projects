@@ -1,8 +1,22 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
+import {
+  CLEAR,
+  DIVIDE,
+  MULTIPLY,
+  PLUS,
+  MINUS,
+  EVALUATE,
+  DECIMAL,
+} from "./constants.js";
+import {
+  addDigit,
+  operation,
+  clear,
+  evaluate,
+} from "./actions.js";
 
 const ButtonPanel = () => {
-  const dispatch = useDispatch();
-
   const BUTTONDATA = useSelector((state) => state.buttondata) || [];
 
   return (
@@ -28,25 +42,51 @@ const Row = (props) => {
       {
         rowData.map((button, index) => {
           return (
-            <Button 
-              key={index} 
-              label={button.label} 
-              value={button.value} 
-              className={button.className} 
+            <Button
+              key={index}
+              label={button.label}
+              value={button.value}
+              className={button.className}
             />
           )
         })
       }
-      
+
     </div>
   )
 }
 
 const Button = (props) => {
+  const dispatch = useDispatch();
   const { label, value, className } = props;
 
+  const handleClick = useCallback((value, label) => {
+    const operationMap = [PLUS, MINUS, MULTIPLY, DIVIDE, EVALUATE, CLEAR, DECIMAL];
+    try {
+      if (!operationMap.includes(value)) {
+        console.log(`Adding Digit - Label: ${label}, Type of label: ${typeof label}`);
+        dispatch(addDigit(label));
+      } else if (value === CLEAR) {
+        console.log(`Clearing Input`);
+        dispatch(clear(value));
+      } else if (value === EVALUATE) {
+        console.log("Evaluating Expression");
+        dispatch(evaluate(value));
+      } else {
+        console.log(`Choosing Operation - Label: ${label}, Type of label: ${typeof label}`);
+        dispatch(operation(label));
+      }
+    } catch (error) {
+      console.error("Error in handleClick:", error);
+    }
+  }, [dispatch]);
+
   return (
-    <button id={label} className={`btn ${className} col-3`} onClick={() => console.log(value)}>
+    <button
+      id={label}
+      className={`btn ${className} col-3`}
+      onClick={() => handleClick(value, label)}
+    >
       {label}
     </button>
   );

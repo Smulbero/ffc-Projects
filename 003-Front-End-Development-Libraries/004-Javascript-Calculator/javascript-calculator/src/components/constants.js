@@ -2,9 +2,11 @@ export const PLUS = "plus";
 export const MINUS = "minus";
 export const MULTIPLY = "multiply";
 export const DIVIDE = "divide";
-export const EQUALS = "equals";
+export const EVALUATE = "evaluate";
 export const CLEAR = "clear";
 export const DECIMAL = "decimal";
+export const ADD_DIGIT = "add_digit";
+export const CHOOSE_OPERATION = "choose_operation";
 
     /*
 
@@ -45,6 +47,6 @@ export const BUTTONDATA = [
   [
     { label: "0", value: 0,         className: "btn-dark col-6"},
     { label: ".", value: DECIMAL,   className: "btn-dark" },
-    { label: "=", value: EQUALS,    className: "btn-info equal-button "}
+    { label: "=", value: EVALUATE,    className: "btn-info equal-button "}
   ]
 ]
