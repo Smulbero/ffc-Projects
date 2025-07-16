@@ -16,7 +16,7 @@ const initialState = {
   currentInput: '0',
   previousInput: "",
   history: [],
-  operation: null,
+  operation: "",
   result: null,
   overwrite: false,
 }
@@ -54,7 +54,7 @@ const operationsReducer = (state = initialState, action) => {
     case DECIMAL:
 
       // Prevent multiple decimals
-      if (state.currentInput.toString().includes('.')) {
+      if (state.currentInput.includes('.')) {
         return state;
       }
 
@@ -63,7 +63,7 @@ const operationsReducer = (state = initialState, action) => {
         currentInput: state.currentInput + '.',
       }
 
-    case CHOOSE_OPERATION:
+    case CHOOSE_OPERATION:      
     
       return {
         ...state,
@@ -71,6 +71,12 @@ const operationsReducer = (state = initialState, action) => {
         previousInput: state.currentInput,
         currentInput: '0',
         overwrite: false,
+        history: [state.previousInput,
+           `${state.currentInput.endsWith('.') ?
+              state.currentInput + '0' :
+              state.currentInput} 
+            ${action.operator} `
+          ],
       }
 
     case EVALUATE:
@@ -85,7 +91,12 @@ const operationsReducer = (state = initialState, action) => {
         previousInput: "",
         operation: null,
         overwrite: true,
-        history: [...state.history, `${state.previousInput} ${state.operation} ${state.currentInput} =`],
+        history: [
+           `${state.previousInput.endsWith('.') ? 
+              state.previousInput + '0' : 
+              state.previousInput}
+            ${state.operation} ${state.currentInput} = `
+          ],
       }
 
     case CLEAR:

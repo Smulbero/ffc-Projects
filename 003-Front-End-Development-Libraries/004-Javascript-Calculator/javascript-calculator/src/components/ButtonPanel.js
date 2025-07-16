@@ -14,6 +14,7 @@ import {
   operation,
   clear,
   evaluate,
+  decimal,
 } from "./actions.js";
 
 const ButtonPanel = () => {
@@ -64,17 +65,27 @@ const Button = (props) => {
     const operationMap = [PLUS, MINUS, MULTIPLY, DIVIDE, EVALUATE, CLEAR, DECIMAL];
     try {
       if (!operationMap.includes(value)) {
-        console.log(`Adding Digit - Label: ${label}, Type of label: ${typeof label}`);
+        // console.log(`Adding Digit - Label: ${label}, Type of label: ${typeof label}`);
         dispatch(addDigit(label));
-      } else if (value === CLEAR) {
-        console.log(`Clearing Input`);
-        dispatch(clear(value));
-      } else if (value === EVALUATE) {
-        console.log("Evaluating Expression");
-        dispatch(evaluate(value));
-      } else {
-        console.log(`Choosing Operation - Label: ${label}, Type of label: ${typeof label}`);
-        dispatch(operation(label));
+        return;
+      }
+      switch (value) {
+        case CLEAR:
+          // console.log(`Clearing Input`);
+          dispatch(clear(value));
+          return;
+        case EVALUATE:
+          // console.log("Evaluating Expression");
+          dispatch(evaluate(value));
+          return;
+        case DECIMAL:
+          // console.log("Adding Decimal Point");
+          dispatch(decimal());
+          return;
+        default: 
+          // console.log(`Choosing Operation - Label: ${label}, Type of label: ${typeof label}`);
+          dispatch(operation(label));
+          return;
       }
     } catch (error) {
       console.error("Error in handleClick:", error);
