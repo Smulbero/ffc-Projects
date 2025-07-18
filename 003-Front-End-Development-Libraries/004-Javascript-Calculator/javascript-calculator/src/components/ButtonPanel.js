@@ -19,7 +19,6 @@ import {
 } from "./actions.js";
 
 const ButtonPanel = () => {
-  // const BUTTONDATA = useSelector((state) => state.buttondata) || [];
 
   return (
     <div className="button-panel w-100 h-100 container p-0 m-0">
@@ -72,19 +71,15 @@ const Button = (props) => {
       }
       switch (value) {
         case CLEAR:
-          // console.log(`Clearing Input`);
           dispatch(clear(value));
           return;
         case EVALUATE:
-          // console.log("Evaluating Expression");
           dispatch(evaluate(value));
           return;
         case DECIMAL:
-          // console.log("Adding Decimal Point");
           dispatch(decimal());
           return;
         default: 
-          // console.log(`Choosing Operation - Label: ${label}, Type of label: ${typeof label}`);
           dispatch(operation(label));
           return;
       }
@@ -95,7 +90,7 @@ const Button = (props) => {
 
   return (
     <button
-      id={label}
+      id={value}
       className={`btn ${className} col-3`}
       onClick={() => handleClick(value, label)}
     >

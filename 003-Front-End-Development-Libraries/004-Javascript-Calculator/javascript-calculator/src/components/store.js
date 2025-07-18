@@ -4,7 +4,7 @@ import {
   CLEAR,
   DECIMAL,
   ADD_DIGIT,
-  CHOOSE_OPERATION
+  CHOOSE_OPERATION,
 } from "./constants.js";
 
 const initialState = {
@@ -12,7 +12,6 @@ const initialState = {
   previousInput: "",
   history: [],
   operation: null,
-  result: null,
   overwrite: false,
 }
 
@@ -29,7 +28,7 @@ const operationsReducer = (state = initialState, action) => {
       }
 
       // Prevent multiple leading zeros
-      if (state.currentInput === 0 && action.number === 0) {
+      if (state.currentInput === '0' && action.number === '0') {
         return state;
       }
 
@@ -38,6 +37,14 @@ const operationsReducer = (state = initialState, action) => {
         return {
           ...state,
           currentInput: action.number,
+        }
+      }
+
+      // Negative numbers
+      if (state.currentInput === '-') {
+        return {
+          ...state,
+          currentInput: state.currentInput + action.number
         }
       }
 
@@ -58,11 +65,55 @@ const operationsReducer = (state = initialState, action) => {
         currentInput: state.currentInput + '.',
       }
 
-    case CHOOSE_OPERATION:      
+    case CHOOSE_OPERATION:
+      // Handle negative inputs
+      if (state.currentInput === '0' &&
+        action.operator === '-' &&
+        state.operation &&
+        !state.currentInput.includes('-')) {
 
-      // Prevent multiple operation presses back to back
-      if(state.operation !== null) return state;
-    
+        console.log("Adding negative")
+        return {
+          ...state,
+          currentInput: '-'
+        }
+      }
+
+      // If multiple operations chained update operation
+      if (state.operation &&
+        state.currentInput === '-' &&
+        action.operator !== '-') {
+
+        return {
+          ...state,
+          operation: action.operator,
+          currentInput: '0'
+        }
+      }
+
+      // Evaluate after an operator press numbers in previous and current inputs
+      if (state.operation &&
+        state.previousInput !== '' &&
+        state.currentInput !== '-') {
+
+        console.log("Evaluating in CHOOSE_OPERATION")
+        const result = evaluateHelp(state.previousInput, state.currentInput, state.operation);
+
+        return {
+          ...state,
+          currentInput: result.toString(),
+          previousInput: result.toString(),
+          operation: action.operator,
+          overwrite: true,
+          history: [
+            `${state.previousInput.endsWith('.') ?
+              state.previousInput + '0' :
+              state.previousInput}
+            ${state.operation} ${state.currentInput} = `
+          ],
+        }
+      }
+
       return {
         ...state,
         operation: action.operator,
@@ -70,11 +121,11 @@ const operationsReducer = (state = initialState, action) => {
         currentInput: '0',
         overwrite: false,
         history: [state.previousInput,
-           `${state.currentInput.endsWith('.') ?
-              state.currentInput + '0' :
-              state.currentInput} 
+        `${state.currentInput.endsWith('.') ?
+          state.currentInput + '0' :
+          state.currentInput} 
             ${action.operator} `
-          ],
+        ],
       }
 
     case EVALUATE:
@@ -86,15 +137,15 @@ const operationsReducer = (state = initialState, action) => {
       return {
         ...state,
         currentInput: result.toString(),
-        previousInput: "",
+        previousInput: result.toString(),
         operation: null,
         overwrite: true,
         history: [
-           `${state.previousInput.endsWith('.') ? 
-              state.previousInput + '0' : 
-              state.previousInput}
+          `${state.previousInput.endsWith('.') ?
+            state.previousInput + '0' :
+            state.previousInput}
             ${state.operation} ${state.currentInput} = `
-          ],
+        ],
       }
 
     case CLEAR:
@@ -129,7 +180,7 @@ const evaluateHelp = (a, b, operator) => {
       if (num2 === 0) {
         throw new Error("Cannot divide by zero");
       }
-      return num1 / num2;      
+      return num1 / num2;
     default: return 0;
   }
 }

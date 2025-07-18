@@ -44,6 +44,6 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: $buttonHeight * 2;
+  height: calc($buttonHeight * 2);
 }
 
