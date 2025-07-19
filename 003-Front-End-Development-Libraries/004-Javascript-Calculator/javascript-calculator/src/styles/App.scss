@@ -1,0 +1,49 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css");
+
+$calculatorWidth : 300px;
+$calculatorHeight : 475px;
+$displayHeight : 100px;
+$displayWidth : $calculatorWidth;
+$buttonPanelHeight : calc($calculatorHeight - $displayHeight);
+$buttonRows: 5;
+$buttonColumns: 4;
+$buttonHeight : calc($buttonPanelHeight / $buttonRows);
+$buttonWidth : calc($buttonPanelHeight / $buttonColumns);
+
+
+main {
+  background-color: #4e4e4e;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.calculator {
+  width: $calculatorWidth;
+  height: $calculatorHeight;
+}
+
+.display {
+  height: $displayHeight;
+  width: $displayWidth;
+}
+
+.button-panel {
+  height: $buttonPanelHeight;
+  position: relative;
+}
+
+.btn {
+  height: $buttonHeight;
+}
+
+.row {
+  position: relative;
+}
+
+.equal-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: calc($buttonHeight * 2);
+}
+
