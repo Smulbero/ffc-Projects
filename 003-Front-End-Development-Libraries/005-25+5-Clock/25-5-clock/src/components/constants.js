@@ -7,13 +7,15 @@ export const SESSION = 'session'
 export const TIMER_ON = 'timer_on'
 
 export const initialState = {    
-    breakLength: 2,
-    sessionLength: 5,
+    breakLength: 5,
+    onBreak: false,
+    sessionLength: 2,
     timerOn: false,
-    currentTimer: 5, // format mm:ss | handle as a string?
+    seconds: 2,
+    minutes: 0
 }
 
 export const OPTION_PANEL_DATA = [
-    { label: 'Break Length', id: "break-label", dataID: "break-length", controlIncrementID: "break-increment", controlDecrementID: 'break-decrement', type: BREAK },
-    { label: 'Session Length', id: "session-label", dataID: "session-length", controlIncrementID: "session-increment", controlDecrementID: 'session-decrement', type: SESSION}
+    { label: 'Break Length', id: "break-label", data: null, dataID: "break-length", controlIncrementID: "break-increment", controlDecrementID: 'break-decrement', type: BREAK },
+    { label: 'Session Length', id: "session-label", data: null, dataID: "session-length", controlIncrementID: "session-increment", controlDecrementID: 'session-decrement', type: SESSION}
 ]

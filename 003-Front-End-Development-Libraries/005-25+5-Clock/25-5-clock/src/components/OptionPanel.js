@@ -10,7 +10,7 @@ export const OptionPanel = (props) => {
             dispatch(increment(type)); // needs type break / session
         }
         catch(e) {
-            console.error(`Error while incrementing: ${e}`)
+            console.error(`Error while trying to increment: ${label}`)
         }
     }
     
@@ -19,12 +19,12 @@ export const OptionPanel = (props) => {
             dispatch(decrement(type)); // needs type break / session
         }
         catch(e) {
-            console.error(`Error while decrementing: ${e}`)
+            console.error(`Error while trying to decrement ${label}: ${e}`)
         }
     }
 
     return (
-        <div className="container bg-info rounded-4 d-flex flex-column justify-content-center align-items-center m-3">
+        <div className="container bg-info rounded-4 d-flex flex-column justify-content-center align-items-center m-2 p-3">
             <label id={id}>{label}</label> 
             <div className="d-flex flex-row">
                 <i id={controlIncrementID} className="bi bi-arrow-up-short" onClick={() => handleIncrement()}></i>
