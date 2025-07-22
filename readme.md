@@ -1,4 +1,4 @@
-This repository contains freecodeCamp projects produced by me, Smulbero according to project instructions to fullfill required user stories.
+This repository contains [freecodeCamp](https://www.freecodecamp.org/) projects produced by me, Smulbero according to project instructions to fullfill required user stories.
 I have included used technology stack used for each section, along with a links to [CodeSandbox] (https://codesandbox.io/) for live preview.No need to clone the repo or worry about getting the projects running on your own machine.
 
 ## Repository content
