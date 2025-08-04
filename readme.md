@@ -23,3 +23,6 @@ I have included used technology stack used for each section, along with a links 
     3. [Drum Machine](https://codesandbox.io/p/sandbox/003-003-drum-machine-whwzld)
     4. [Javascript Calculator](https://codesandbox.io/p/sandbox/003-004-javascript-calculator-gwy4jl)
     5. [25+5 Clock](https://codesandbox.io/p/sandbox/003-005-25-5-clock-lt8q73)
+4. ### Data Visualization  
+    Technology stack used: HTML, CSS, JS, D3
+    1. [Bar Chart](https://codesandbox.io/p/sandbox/004-001-d3-bar-chart-3nqd5s)
