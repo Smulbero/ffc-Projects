@@ -1,16 +1,17 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-const WIDTH = 1000
-const HEIGHT = 1000;
+const WIDTH = window.innerWidth * 0.8;
+const HEIGHT = window.innerHeight * 0.8;
 const PADDING = 50;
 const CIRCLE_RADIUS = 5;
 const TITLE = 'Doping in Professional Bicycle Racing'
 const SUB_TITLE = "35 Fastest times up Alpe d'Huez"
-const DOPING_ALLECATION_COLOR = 'orange'
-const NO_DOPING_ALLECATION_COLOR = 'steelblue'
-const COLOR_INFO_DATA = ['No doping allecations', 'Riders with doping allecations']
+const COLOR_INFO_DATA = [
+  { title: 'No doping allecations', color: 'steelblue' },
+  { title: 'Riders with doping allecations', color: 'orange' }
+]
 const X_AXIS_OFFSET = 1;
-const Y_AXIS_OFFSET = 30;
+const Y_AXIS_OFFSET = null;
 const INFO_NODE_SIZE = 15;
 
 // Fetch Dataset
@@ -32,8 +33,8 @@ const fetchData = async (URL) => {
 
 const DATASET = await fetchData(DATA_URL)
 
-const formatSeconds = (num) => {
-    console.log(num);
+const formatHelper = (num) => {
+    console.log(`Value of num in formatter:`, num);
     const min = Math.floor(num / 60);
     const s = String(num % 60).padStart(2, '0');
     return `${min}:${s}`
@@ -41,19 +42,19 @@ const formatSeconds = (num) => {
 
 // Start of D3
 const MAIN_CONTAINER = d3.select('#main-container');
-const MIN_X_AXIS = d3.min(DATASET, d => Number(d.Year) - X_AXIS_OFFSET)
-const MAX_X_AXIS = d3.max(DATASET, d => Number(d.Year) + X_AXIS_OFFSET)
-const MIN_Y_AXIS = d3.min(DATASET, d => new Date(d.Seconds))
-// const MIN_Y_AXIS = d3.min(DATASET, d => console.log(d))
-const MAX_Y_AXIS = d3.max(DATASET, d => new Date(d.Seconds))
+const MIN_X_AXIS = d3.min(DATASET, d => Number(d.Year))
+const MAX_X_AXIS = d3.max(DATASET, d => Number(d.Year))
+const MIN_Y_AXIS = d3.min(DATASET, d => d.Time)
+const MAX_Y_AXIS = d3.max(DATASET, d => d.Time)
+// console.log(`Y-axis debug info: ${DATASET[0].Seconds / 60}`)
 
 const X_SCALE = d3
-    .scaleLinear()
+    .scaleTime()
     .domain([MIN_X_AXIS, MAX_X_AXIS])
     .range([PADDING, WIDTH - PADDING]);
 
 const Y_SCALE = d3
-    .scaleLinear()
+    .scaleTime()
     .domain([MIN_Y_AXIS, MAX_Y_AXIS])
     .range([HEIGHT - PADDING, PADDING * 2.5]);
 
@@ -63,14 +64,15 @@ const SVG = MAIN_CONTAINER
     .attr('height', HEIGHT)
     .attr('id', 'svg');
 
-const X_AXIS = d3.axisBottom(X_SCALE);
+const X_AXIS = d3.axisBottom(X_SCALE)
+  .tickFormat(Number)
 SVG.append('g')
     .attr('transform', `translate(0, ${HEIGHT - PADDING})`)
     .attr('id', 'x-axis')
     .call(X_AXIS);
 
 const Y_AXIS = d3.axisLeft(Y_SCALE)
-    .tickFormat(formatSeconds);
+    .tickFormat(d3.timeFormat("%M:%S"));
 SVG.append('g')
     .attr('transform', `translate(${PADDING}, 0)`)
     .attr('id', 'y-axis')
@@ -113,12 +115,12 @@ SVG.selectAll('circle')
     .enter()
     .append('circle')
     .attr('cx', d => X_SCALE(Number(d.Year)))
-    .attr('cy', d => Y_SCALE(new Date(d.Seconds)))
+    .attr('cy', d => Y_SCALE(d.Time))
     .attr('r', CIRCLE_RADIUS)
     .attr('data-xvalue', d => Number(d.Year))
-    .attr('data-yvalue', d => new Date(d.Seconds))
+    .attr('data-yvalue', d => d.Time )
     .attr('class', 'dot')
-    .attr('fill', d => d.Doping === "" ? NO_DOPING_ALLECATION_COLOR : DOPING_ALLECATION_COLOR)
+    .attr('fill', (d, i) => d.Doping === "" ? COLOR_INFO_DATA[0].color : COLOR_INFO_DATA[1].color)
     .on('mouseover', (_, d) => {
         TOOLTIP
             .style('opacity', 0.9) 
@@ -154,7 +156,7 @@ COLOR_INFO.selectAll('rect')
     .attr('y', (_, i) =>  i * (INFO_NODE_SIZE + 2))
     .attr('width', INFO_NODE_SIZE)
     .attr('height', INFO_NODE_SIZE)
-    .attr('fill', d => d.startsWith('No') ? NO_DOPING_ALLECATION_COLOR : DOPING_ALLECATION_COLOR)
+    .attr('fill', d => d.color)
 
 COLOR_INFO.selectAll('text')
     .data(COLOR_INFO_DATA)
@@ -162,5 +164,5 @@ COLOR_INFO.selectAll('text')
     .append('text')
     .attr('x', -5)
     .attr('y', (_, i) => i * (INFO_NODE_SIZE + 5) + INFO_NODE_SIZE / 1.5)
-    .text(d => d)
+    .text(d => d.title)
     .style('text-anchor', 'end')
