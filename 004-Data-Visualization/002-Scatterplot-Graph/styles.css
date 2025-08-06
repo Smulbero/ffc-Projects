@@ -19,8 +19,8 @@ h1 {
 svg {
     background-color: #fff;
     position: absolute;
-    top: 150px;
-    left: 200px;
+    left: 2%;
+    top: 5%;
 }
 
 #tooltip {
