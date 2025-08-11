@@ -43,7 +43,7 @@ const LEGEND = SVG.append('g')
 
 
 // Color scale data
-const customColors = [
+const CUSTOM_COLORS = [
     "#f7fbff",
     "#deebf7",
     "#c6dbef",
@@ -57,7 +57,7 @@ const customColors = [
     "#01122cff",
 ];
 
-const ticks = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+const TICKS = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
 
 // SVG Titles
 const TITLE_CONTAINER = SVG.append('g')
@@ -83,25 +83,25 @@ TITLE_CONTAINER.append('text')
     .text(SVG_SUB_TITLE);
 
 // Legend
-const legend_x_scale = d3.scaleBand()
-    .domain(ticks)
+const LEGEND_X_SCALE = d3.scaleBand()
+    .domain(TICKS)
     .range([MARGIN.left * 13, SVG_WIDTH - (MARGIN.right * 3)])
 
-const legend_x_axis = d3.axisBottom(legend_x_scale);
+const LEGEND_X_AXIS = d3.axisBottom(LEGEND_X_SCALE);
 
 LEGEND.append('g')
     .attr('transform', `translate(${0}, ${0})`)
-    .call(legend_x_axis)
+    .call(LEGEND_X_AXIS)
 
 LEGEND.selectAll('rect')
-    .data(ticks)
+    .data(TICKS)
     .enter()
     .append('rect')
-    .attr('x', d => legend_x_scale(d))
-    .attr('y', 0 - legend_x_scale.bandwidth() / 2)
-    .attr('width', legend_x_scale.bandwidth())
-    .attr('height', legend_x_scale.bandwidth() / 2)
-    .attr('fill', (d, i) => customColors[i])
+    .attr('x', d => LEGEND_X_SCALE(d))
+    .attr('y', 0 - LEGEND_X_SCALE.bandwidth() / 2)
+    .attr('width', LEGEND_X_SCALE.bandwidth())
+    .attr('height', LEGEND_X_SCALE.bandwidth() / 2)
+    .attr('fill', (d, i) => CUSTOM_COLORS[i])
 
 
 // Fetch data
@@ -112,52 +112,53 @@ Promise.all([
     drawMap(countyJson, educationJson)
 })
 
-const path = d3.geoPath();
+const PATH = d3.geoPath();
 
-// Color map_scale
-const colorScale = d3.scaleThreshold()
-    .domain(ticks)
-    .range(customColors);
+// Color MAP_SCALE
+const COLOR_SCALE = d3.scaleThreshold()
+    .domain(TICKS)
+    .range(CUSTOM_COLORS);
 
 function drawMap(countyData, educationData) {
-    const counties = topojson.feature(countyData, countyData.objects.counties);
-    const color_map = new Map(educationData.map(d => [d.fips, d.bachelorsOrHigher]));
-    const tooltip_map = new Map(educationData.map(d => [d.fips, [d.state, d.area_name, d.bachelorsOrHigher]]));
+    const COUNTIES = topojson.feature(countyData, countyData.objects.counties);
+    const COLOR_MAP = new Map(educationData.map(d => [d.fips, d.bachelorsOrHigher]));
+    const TOOLTIP_MAP = new Map(educationData.map(d => [d.fips, [d.state, d.area_name, d.bachelorsOrHigher]]));
 
-    const bounds = path.bounds(counties)
-    const min_x = bounds[0][0]
-    const min_y = bounds[0][1]
-    const max_x = bounds[1][0]
-    const max_y = bounds[1][1]
+    // Map scale to fit on svg
+    const BOUNDS = PATH.bounds(COUNTIES)
+    const MIN_X = BOUNDS[0][0]
+    const MIN_Y = BOUNDS[0][1]
+    const MAX_X = BOUNDS[1][0]
+    const MAX_Y = BOUNDS[1][1]
 
-    const map_scale = 0.8
-    console.log(map_scale)
-    const translate = [
-        (SVG_WIDTH - map_scale * (max_x + min_x)) / 2,
-        (SVG_HEIGHT - map_scale * (max_y + min_y)) / 2 + MARGIN.top
+    const MAP_SCALE = 0.8
+    console.log(MAP_SCALE)
+    const TRANSLATE = [
+        (SVG_WIDTH - MAP_SCALE * (MAX_X + MIN_X)) / 2,
+        (SVG_HEIGHT - MAP_SCALE * (MAX_Y + MIN_Y)) / 2 + MARGIN.top
     ];
 
     SVG.append('g')
-        .attr("transform", `translate(${translate}) scale(${map_scale})`)
+        .attr("transform", `translate(${TRANSLATE}) scale(${MAP_SCALE})`)
         .selectAll('path')
-        .data(counties.features)
+        .data(COUNTIES.features)
         .enter()
         .append('path')
-        .attr('d', path)
+        .attr('d', PATH)
         .attr('class', 'county')
         .attr('data-fips', d => d.id) // needed for ffc test
-        .attr('data-education', d => color_map.get(d.id)) // needed for ffc test
+        .attr('data-education', d => COLOR_MAP.get(d.id)) // needed for ffc test
         .attr('stroke', '#474747ff')
-        .style('stroke-width', 0.5 / map_scale)
+        .style('stroke-width', 0.5 / MAP_SCALE)
         .attr('fill', d => {
-            const rate = color_map.get(d.id);
-            return rate ? colorScale(rate) : 'yellow'
+            const RATE = COLOR_MAP.get(d.id);
+            return RATE ? COLOR_SCALE(RATE) : 'yellow'
         })
         .on('mouseover', function (_, d) {
             TOOLTIP
                 .style('opacity', 0.9)
-                .html(`${tooltip_map.get(d.id)}`)
-                .attr('data-education', color_map.get(d.id)) // needed for ffc test
+                .html(`${TOOLTIP_MAP.get(d.id)}`)
+                .attr('data-education', COLOR_MAP.get(d.id)) // needed for ffc test
 
         })
         .on('mousemove', function (event) {
