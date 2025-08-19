@@ -1,18 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7/+esm';
 import * as topojson from 'https://cdn.jsdelivr.net/npm/topojson-client@3/+esm';
 
-const fetchData = async (URL) => {
-    try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        console.log(`Dataset fetch succeeded`);
-        return data;
-    } catch (e) {
-        console.error(`Dataset fetch failed: ${e}`);
-        return null;
-    }
-};
-
 // Data urls
 const US_EDUCATION_DATA_URL = 'https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json';
 const US_COUNTY_DATA_URL = 'https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json';

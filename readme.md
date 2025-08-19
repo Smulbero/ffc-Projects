@@ -29,3 +29,4 @@ I have included used technology stack used for each section, along with a links 
     2. [Scatterplot Chart](https://codesandbox.io/p/sandbox/004-002-d3-scatter-plot-mlw7cj)
     3. [Heat Map](https://codesandbox.io/p/sandbox/004-003-d3-heat-map-nr94j9)
     4. [Choropleth Map](https://codesandbox.io/p/sandbox/004-004-d3-choropleth-map-c9fl8v)
+    4. [Treemap Diagram](https://codesandbox.io/p/sandbox/004-005-d3-treemap-diagram-xx83py)
